@@ -34,6 +34,7 @@
             <div>
                 <label for="tel">Enter Phone Number: </label>
                 <input type="tel" id="tel" name="tel" placeholder="Enter Phone Number...">
+                <error-output class="phone-error" for="tel"></error-output>
             </div>
             <div>
                 <label for="search">Enter Search Keyword: </label>
@@ -55,6 +56,15 @@
             </div>
         </form>
         <script>
+            const phone = document.querySelector('#tel');
+            const phoneError = document.querySelector('.phone-error');
+            phone.addEventListener('input', function() {
+                let phoneRegex = RegExp("^[0-9]{1,}[ ][1-9]{1}[0-9]{9}$");
+                if(phoneRegex.test(phone.value))
+                    phoneError.textContent = " ";
+                else
+                    phoneError.textContent = "Incorrect Phone!"
+            });
             const email = document.querySelector('#email');
             const emailError = document.querySelector('.email-error');
             email.addEventListener('input', function() {
