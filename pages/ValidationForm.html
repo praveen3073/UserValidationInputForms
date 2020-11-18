@@ -60,11 +60,22 @@
             const pass = document.querySelector('#pass');
             const passError = document.querySelector('.pass-error');
             pass.addEventListener('input', function() {
+                // Rule 1: Min length 8
                 let passRule1Regex = RegExp("^.{8,}$");
-                if(passRule1Regex.test(pass.value))
+                // Rule 2: Atleast 1 upper case
+                let passRule2Regex = RegExp("^.*[A-Z]+.*$");
+                // Rule 3: Atleast 1 number
+                let passRule3Regex = RegExp("^.*[0-9]+$");
+                // Rule 4: Exactly 1 special character
+                let passRule4Regex = RegExp("^\\w*[^\\w\\s]{1}\\w*$");
+
+                if(passRule1Regex.test(pass.value) &&
+                        passRule2Regex.test(pass.value) &&
+                        passRule3Regex.test(pass.value) &&
+                        passRule4Regex.test(pass.value))
                     passError.textContent = " ";
                 else
-                    passError.textContent = "Min Length 8!";
+                    passError.textContent = "Incorrect Password!";
             });
 
             const phone = document.querySelector('#tel');
